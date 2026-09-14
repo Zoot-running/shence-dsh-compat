@@ -1,4 +1,4 @@
-# @shence/llm-openai-compat 插件入口（bundle 补丁：insert 新条目）
+# @shence/dsh-compat 插件入口（bundle 补丁：insert 新条目）
 - insert:
-    - id: llm-openai-compat
-      name: '@shence/llm-openai-compat'
+    - id: dsh-compat
+      name: '@shence/dsh-compat'
