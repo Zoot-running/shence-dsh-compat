@@ -1,7 +1,7 @@
 {
-  "name": "@shence/llm-openai-compat",
+  "name": "@shence/dsh-compat",
   "version": "0.1.0",
-  "description": "集思附属：OpenAI 兼容 provider 适配器（多路由），供 Kimi/智谱等国内模型接入 DSH",
+  "description": "DSH compat —— OpenAI 兼容协议适配器插件(多路由): 国产模型(Kimi/智谱等)接入 DeepSeek Harness 的桥; 余额枯竭检测+隔离(F35)驻于此。集思的依赖项, 与集思本体无关。",
   "type": "module",
   "main": "lib/index.js",
   "types": "src/index.ts",
@@ -11,7 +11,8 @@
     "cordis.patch.yml"
   ],
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --format=esm --platform=node --packages=external --outfile=lib/index.js"
+    "build": "esbuild src/index.ts --bundle --format=esm --platform=node --packages=external --outfile=lib/index.js",
+    "test": "vitest run"
   },
   "dsh": {
     "bundle": {
@@ -28,6 +29,7 @@
     "@deepseek-ai/schemastery": "*"
   },
   "devDependencies": {
-    "esbuild": "^0.24.0"
+    "esbuild": "^0.24.0",
+    "vitest": "^2.1.0"
   }
 }

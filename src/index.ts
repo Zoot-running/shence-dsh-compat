@@ -9,7 +9,7 @@ import z from '@deepseek-ai/schemastery'
 import { OpenAICompatAdapter } from './adapter.ts'
 import type { CompatModelInfo, RouteFacts } from './adapter.ts'
 
-export const name = 'llm-openai-compat'
+export const name = 'dsh-compat'
 export const inject = ['llm']
 
 export interface RouteConfig {
