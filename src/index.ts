@@ -83,3 +83,6 @@ export function apply(ctx: Context, config: Config): void {
 
 // F35: 余额枯竭检测/隔离 pure-logic 导出（jisi 复用；DSH 插件加载器也可见）。
 export { isBalanceExhausted, readBalanceExhausted, recordBalanceExhausted } from './balance-guard.ts'
+
+// v6: 故障窗口检测导出(宿主 runner 直接读 sidecar 过滤失败计数)。
+export { inOutageWindow, readOutageWindows, observeProviderFailure, observeProviderSuccess } from './outage-guard.ts'

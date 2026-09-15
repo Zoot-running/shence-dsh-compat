@@ -5,6 +5,7 @@
  */
 
 import { isBalanceExhausted, recordBalanceExhausted } from './balance-guard.ts'
+import { observeProviderFailure, observeProviderSuccess } from './outage-guard.ts'
 import { attributionHeaders, assertUsableApiKey, LlmError, LlmAdapter, ReasoningEffortId } from '@deepseek-ai/dsh-llm'
 import type {
   GenerateOptions,
@@ -124,6 +125,8 @@ export class OpenAICompatAdapter extends LlmAdapter {
         yield { type: 'finish', reason: { kind: 'aborted' } }
         return
       }
+      // v6: 供应商故障突发检测(连续 TRANSPORT 失败 → outage 窗口 sidecar)。
+      observeProviderFailure(options.provider)
       throw new LlmError(`request to ${connection.baseURL} failed: ${String(error)}`, 'TRANSPORT', { cause: error })
     }
 
@@ -163,6 +166,7 @@ export class OpenAICompatAdapter extends LlmAdapter {
       return
     }
 
+    observeProviderSuccess(options.provider)
     let usage: TokenUsage | undefined
     for await (const chunk of translate(parseSse(response.body))) {
       if (chunk.type === 'usage') usage = chunk.usage
